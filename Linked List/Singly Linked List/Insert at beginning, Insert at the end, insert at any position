@@ -1,0 +1,129 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int countElement=1; // size of node
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+node *head=NULL,*newnode; ///head is point the first node;
+                                ///temp pointer for taversing and
+                                //newnode pointer works for create a space
+
+///display funtion
+void display(){
+    node *temp1;
+    temp1=head;
+    while(temp1!=NULL){
+        cout<<temp1->data<<endl;
+        temp1=temp1->next;
+    }
+    
+
+}
+///create node
+void insertNewnode()
+{
+    node *temp;
+    int choice=1;         /// 1 means continue taking node
+    while(choice!=0){
+        newnode=(node*)malloc(sizeof(node));
+        cout<< "Enter a data:"<<endl;
+        cin>>newnode->data;
+        newnode->next=NULL;
+        if(head==NULL){
+            head=temp=newnode;
+        }
+        else {
+            temp->next=newnode;
+            temp=newnode;
+        }
+        cout<< "Do you want to take another node: press 1 for yes and press 0 for no:"<<endl;
+        cin>>choice;
+
+    }
+    //temp=head;
+    
+}
+// create a node at the begining
+void insertBegining()
+{
+    newnode=(node*)malloc(sizeof(node));
+    cout<< "Enter a data:"<<endl;
+     cin>>newnode->data;
+    newnode->next=head;
+    head=newnode;
+    
+}
+// Insert at end
+void InsertAtEnd()
+{
+    newnode=(node*)malloc(sizeof(node));
+    cout<< "Enter a node:"<<endl;
+    cin>>newnode->data;
+    newnode->next=NULL;
+    node *link; ///link is temporary pointer 
+    link=head;
+    while(link->next!=NULL){
+        link=link->next;
+    }
+    link->next=newnode;
+
+}
+/// count how many node 
+void countLinkedList()
+{
+    node *temp;
+    temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+        countElement++;
+    }
+    
+}
+/// insert any positon
+void InsertAnyPosition()
+{
+    int pos;
+    cout<< "Enter position where you insert a node:" <<endl;
+    cin>>pos;
+    if(pos>countElement){
+        cout<< "Invalid position!@"<<endl;
+    }
+    else{
+        node *temp;
+        temp=head;
+        int i=1;
+        while(i<pos){
+            temp=temp->next;
+            i++;
+        }
+        newnode=(node*)malloc(sizeof(node));
+        cout<< "Enter a data:"<<endl;
+        cin>>newnode->data;
+        newnode->next=temp->next;
+        temp->next=newnode;
+    }
+}
+
+
+int main()
+{
+    insertNewnode();
+    cout<< "Display all node:"<<endl;
+    display();
+    insertBegining();
+    cout<< "After inserting first:"<<endl;
+    display();
+    InsertAtEnd();
+    cout<< "After inserting at the end:"<<endl;
+    display();
+    countLinkedList();
+    InsertAnyPosition();
+    cout<< "After Insertion any position:"<<endl;
+    display();
+    //cout<< "The size of linkedlist"<< " "<<countElement;
+}
