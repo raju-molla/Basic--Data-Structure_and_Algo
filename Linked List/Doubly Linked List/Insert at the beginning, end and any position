@@ -1,0 +1,133 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+    node *prev;
+};
+
+node *head=NULL, *newnode,*tail=NULL;
+int sizeofnode=0;
+
+void display()
+{
+    node *temp;
+    temp=head;
+    while(temp!=NULL){
+        cout<< temp->data<< " ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+
+
+void create()
+{
+
+    int choice=1;
+    while(choice==1){
+        newnode=(node*)malloc(sizeof(node));
+        cout<< "Enter a data:"<<endl;
+        cin>>newnode->data;
+        newnode->next=NULL;
+        newnode->prev=NULL;
+        if(head==NULL){
+            head=tail=newnode;
+        }
+        else {
+            tail->next=newnode;
+            newnode->prev=tail;
+            tail=newnode;
+        }
+        cout<< "Enter 1 for continue taking data and 0 for stop!@"<<endl;
+        cin>>choice;
+        sizeofnode++;
+    }
+}
+
+void insert_at_begining()
+{
+
+    newnode=(node*)malloc(sizeof(node));
+    cout<< "Enter a data:"<<endl;
+    cin>>newnode->data;
+    newnode->next=NULL;
+    newnode->prev=NULL;
+    head->prev=newnode;
+    newnode->next=head;
+    head=newnode;
+    sizeofnode++; ///just for if counting size of node
+                  ///If you want to used the function
+
+
+
+}
+
+void insert_at_end()
+{
+        newnode=(node*)malloc(sizeof(node));
+        cout<< "Enter a data:"<<endl;
+        cin>>newnode->data;
+        newnode->next=NULL;
+        newnode->prev=NULL;
+        tail->next=newnode;
+        newnode->prev=tail;
+        tail=newnode;
+        sizeofnode++; ///just for if counting size of node
+                      ///If you want to used the function
+}
+
+void insert_at_any_positon(){
+    int pos;
+    cout<< "Enter which position you insert a node"<<endl;
+    cin>>pos;
+    if(pos<1 && pos>sizeofnode){
+        cout<< "invalied"<<endl;
+    }
+    else if(pos==1){
+        insert_at_begining();
+    }
+    else if(pos==sizeofnode+1){
+        insert_at_end();
+    }
+    else {
+        newnode=(node*)malloc(sizeof(node));
+        cout<< "Enter a data:"<<endl;
+        cin>>newnode->data;
+        newnode->next=NULL;
+        newnode->prev=NULL;
+        int i=1;
+        node *temp; /// for taversing
+        temp=head;
+        while(i<pos-1){
+            temp=temp->next;
+            i++;
+        }
+        newnode->prev=temp;
+        newnode->next=temp->next;
+        temp->next->prev=newnode;
+        temp->next=newnode;
+
+    }
+}
+
+
+int main()
+{
+    create();
+    cout<< "Display all node:"<<endl;
+    display();
+    insert_at_begining();
+    cout<< "After inserting at the begining:"<<endl;
+    display();
+    insert_at_end();
+    cout<< "After inserting at the end:"<<endl;
+    display();
+    insert_at_any_positon();
+    cout<< "After inserting at the any pos:"<<endl;
+    display();
+
+}
+
+
