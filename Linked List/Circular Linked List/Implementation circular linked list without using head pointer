@@ -1,0 +1,56 @@
+///without using head pointer
+
+#include<bits/stdc++.h>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+}*tail=NULL;
+
+void display()
+{
+    node *temp;
+    if(tail==NULL){
+        cout<< "Empty!"<<endl;
+    }
+    else {
+        temp=tail->next;
+        while(temp->next!=tail->next){
+            cout<<temp->data<<endl;
+            temp=temp->next;
+        }
+
+        cout<< temp->data<<endl;
+    }
+}
+
+void createnode()
+{
+    int choice=1;
+    while(choice){
+        node *newnode=(node*)malloc(sizeof(node));
+        cout<< "Enter a data:"<<endl;
+        cin>>newnode->data;
+        newnode->next=NULL;
+        if(tail==NULL){
+            tail=newnode;
+            tail->next=newnode;
+        }
+        else {
+            newnode->next=tail->next;
+            tail->next=newnode;
+            tail=newnode;
+        }
+        cout<< "press 1 for continue and 0 for stop !"<<endl;
+        cin>>choice;
+    }
+}
+
+
+int main()
+{
+    createnode();
+    cout<< "----------output----------"<<endl;
+    display();
+}
