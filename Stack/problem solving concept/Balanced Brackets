@@ -1,0 +1,46 @@
+///Where i'm in larned
+///source:https://www.youtube.com/watch?v=QZOLb0xHB_Q
+
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+bool chk(char opening , char closing){
+    if(opening=='(' && closing==')')return true;
+    else if(opening=='{' && closing=='}')return true;
+    else if(opening=='[' && closing==']')return true;
+    return false;
+
+}
+
+
+bool balancingOfSymbol(string str){
+    stack<char>s;
+    for(int i=0; i<str.size(); i++){
+        if(str[i]=='(' || str[i]=='{' || str[i]=='[')
+                s.push(str[i]);
+        else if(str[i]==')' || str[i]=='}' || str[i]==']')
+            if(s.empty()|| !chk(s.top(),str[i]))
+                   return false;
+            else
+                   s.pop();
+
+
+    }
+    return s.empty()?true: false;
+
+}
+
+
+int main()
+{
+    string s;
+    cin>>s;
+    if(balancingOfSymbol(s))
+        cout<< "YES"<<endl;
+    else
+        cout<< "NO"<<endl;
+}
