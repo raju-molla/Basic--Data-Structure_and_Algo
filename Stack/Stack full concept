@@ -1,0 +1,153 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int stk[5]; ///stack declaration and size
+int top=-1; /// where staying now stack;
+
+bool isEmpty(){
+    if(top==-1)
+        return true;
+    else
+        return false;
+}
+bool isFull(){
+    if(top==4)
+        return true;
+    else
+        return false;
+}
+void push(int value)
+{
+    if(isFull()){
+        cout<< "Stack overflow!"<<endl;
+    }
+    else{
+        top++;
+        stk[top]=value;
+    }
+}
+
+int pop(){
+    if(isEmpty())
+    {
+        cout<< "Stack Underflow!"<<endl;
+        return 0;
+    }
+    else{
+        int popvalue=stk[top];
+        stk[top]=0;
+        top--;
+        return popvalue;
+    }
+}
+
+int countstack(){
+    return (top+1);
+}
+
+int peek(int pos){
+    if(isEmpty()){
+        cout<< "Stack underflow"<<endl;
+        return 0;
+    }
+    else{
+        return stk[pos];
+    }
+}
+void change(int pos, int value)
+{
+    stk[pos]=value;
+    cout<< "Successfully changed!"<<endl;
+}
+void display(){
+    int k=top;
+    cout<< "All stack values are:"<<endl;
+    for(int i=k; i>=0; i--){
+        cout<<stk[i]<< " ";
+    }
+    cout<<endl;
+}
+
+
+int main()
+{
+    int option, position, value;
+    do{
+        cout << "                 What operation do you want to perform? Select Option number. Enter 0 to exit." << endl;
+        cout << "                                            1. Push()" << endl;
+        cout << "                                            2. Pop()" << endl;
+        cout << "                                            3. isEmpty()" << endl;
+        cout << "                                            4. isFull()" << endl;
+        cout << "                                            5. peek()" << endl;
+        cout << "                                            6. countstack()" << endl;
+        cout << "                                            7. change()" << endl;
+        cout << "                                            8. display()" << endl;
+        cout << "                                            9. Clear Screen" << endl << endl;
+
+        cin>>option;
+        switch(option){
+            case 0:
+                break;
+
+            case 1:
+                cout<< "Enter a value:"<<endl;
+                cin>>value;
+                push(value);
+                break;
+
+            case 2:
+                cout<< "Pop Function called->: "<<pop()<<endl;
+                break;
+
+            case 3:
+                if(isEmpty()){
+                    cout<< "The stack is empty!"<<endl;
+                }
+                else{
+                    cout<< "Stack is not empty!"<<endl;
+                }
+                break;
+
+            case 4:
+                if(isFull()){
+                    cout<< "The stack is Full!"<<endl;
+                }
+                else{
+                    cout<< "Stack is not Full!"<<endl;
+                }
+                break;
+
+            case 5:
+                cout<< "Enter position which element you want:"<<endl;
+                cin>>position;
+                cout<< "The value is: "<<peek(position)<<endl;
+                break;
+
+            case 6:
+                cout<< "Count Function called-> "<<countstack()<<endl;
+                break;
+
+            case 7:
+                cout<< "Enter value for change:"<<endl;
+                cin>>value;
+                cout<< "Enter the position: "<<endl;
+                cin>>position;
+                change(position,value);
+                break;
+            case 8:
+                cout<< "Display function is called:"<<endl;
+                display();
+                break;
+            case 9:
+                system("cls");
+                break;
+            default:
+                cout<< "Enter proper option number:"<<endl;
+        }
+
+    }while(option!=0);
+    return 0;
+}
+
+
+
