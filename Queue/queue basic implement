@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+int rear=-1,front=0;
+#define size 100
+int que[size];
+void enqueue(int value)
+{
+    if(rear==size){
+        cout<< "Overflow"<<endl;
+    }else{
+        que[++rear]=value;
+    }
+}
+
+void dequeue(){
+    if(size<0){
+        cout<< "Underflow"<<endl;
+    }else{
+        cout<< "The queue is : "<<que[front++]<<endl;
+    }
+}
+void display()
+{
+    cout<< "Display all values"<<endl;
+    for(int i=front; i<=rear; i++){
+        cout<<que[i]<<endl;
+    }
+}
+
+int main()
+{
+    enqueue(1);
+    enqueue(10);
+    enqueue(15);
+    enqueue(16);
+    enqueue(17);
+    display();
+    cout<< "Dequeue: "<<endl;
+    dequeue();
+    dequeue();
+
+    
+}
